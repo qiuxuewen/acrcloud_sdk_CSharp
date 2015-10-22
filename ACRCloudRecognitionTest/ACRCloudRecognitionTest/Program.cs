@@ -56,7 +56,7 @@ namespace ACRCloudRecognitionTest
             {
                 pcmBufferLen = pcmBuffer.Length;
             }
-            byte tIsDB = (isDB)? (byte)1 : (byte)0;
+            byte tIsDB = (isDB) ? (byte)1 : (byte)0;
             IntPtr pFpBuffer = IntPtr.Zero;
             int fpBufferLen = create_fingerprint(pcmBuffer, pcmBufferLen, tIsDB, ref pFpBuffer);
             if (fpBufferLen <= 0)
@@ -471,13 +471,16 @@ namespace ACRCloudRecognitionTest
 
             return res;
         }
-    } 
+    }
 
     class Program
     {
+        //metainfos https://docs.acrcloud.com/metadata
         static void Main(string[] args)
         {
             var config = new Dictionary<string, object>();
+            config.Add("host", "ap-southeast-1.api.acrcloud.com");
+            // Replace "XXXXXXXX" below with your project's access_key and access_secret
             config.Add("access_key", "XXXXXXXX");
             config.Add("access_secret", "XXXXXXXX");
             config.Add("timeout", 10); // seconds
@@ -490,7 +493,7 @@ namespace ACRCloudRecognitionTest
               *     
               * 
              **/
-            
+
             ACRCloudRecognizer re = new ACRCloudRecognizer(config);
 
             // It will skip 80 seconds from the beginning of test.mp3.
@@ -511,7 +514,7 @@ namespace ACRCloudRecognitionTest
                 {
                     byte[] datas = reader.ReadBytes((int)fs.Length);
                     // It will skip 80 seconds from the beginning of datas.
-                    result = re.RecognizeByFileBuffer(datas, datas.Length, 80);               
+                    result = re.RecognizeByFileBuffer(datas, datas.Length, 80);
                     Console.WriteLine(result);
                 }
             }
@@ -533,7 +536,7 @@ namespace ACRCloudRecognitionTest
                 }
             }*/
 
-            Console.ReadLine(); 
+            Console.ReadLine();
         }
     }
 }
