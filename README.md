@@ -1,6 +1,6 @@
 # acrcloud_sdk_CSharp
-Create "ACRCloud Fingerprint" by Audio/Video file, and use "ACRCloud Fingerprint" to recognize metainfos by "ACRCloud webapi".<bt>
-[https://docs.acrcloud.com/](https://docs.acrcloud.com/)
+Create "ACRCloud Fingerprint" by Audio/Video file, and use "ACRCloud Fingerprint" to recognize metainfos by "ACRCloud webapi".<br>
+Refer to [https://docs.acrcloud.com/](https://docs.acrcloud.com/)
 
 # Overview
 This module can recognize ACRCloud by most of audio/video file.<br>
