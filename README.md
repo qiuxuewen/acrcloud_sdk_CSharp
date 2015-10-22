@@ -11,7 +11,7 @@ Introduction all API.
 ## recognizer.cs
 ```c
 class ACRCloudRecognizer
-  public String RecognizeByFile(String filePath, int startSeconds)
+  public String RecognizeByFile(String filePath, int startSeconds);
     /**
       *
       *  recognize by file path of (Audio/Video file)
@@ -25,7 +25,7 @@ class ACRCloudRecognizer
       *
       **/
       
-  public String RecognizeByFileBuffer(byte[] fileBuffer, int fileBufferLen, int startSeconds)
+  public String RecognizeByFileBuffer(byte[] fileBuffer, int fileBufferLen, int startSeconds);
     /**
       *
       *  recognize by buffer of (Audio/Video file)
@@ -40,7 +40,7 @@ class ACRCloudRecognizer
       *
       **/
       
-  public string Recognize(byte[] wavAudioBuffer, int wavAudioBufferLen)
+  public string Recognize(byte[] wavAudioBuffer, int wavAudioBufferLen);
     /**
       *
       *  recognize by wav audio buffer(RIFF (little-endian) data, WAVE audio, Microsoft PCM, 16 bit, mono 8000 Hz) 
@@ -55,7 +55,7 @@ class ACRCloudRecognizer
 
 
 class ACRCloudExtrTool
-  public byte[] CreateFingerprint(byte[] pcmBuffer, int pcmBufferLen, bool isDB)
+  public byte[] CreateFingerprint(byte[] pcmBuffer, int pcmBufferLen, bool isDB);
    /**
     *
     *  create "ACRCloud Fingerprint" by wav audio buffer(RIFF (little-endian) data, WAVE audio, Microsoft PCM, 16 bit, mono 8000 Hz) 
@@ -68,7 +68,7 @@ class ACRCloudExtrTool
     *
     **/
     
-  public byte[] CreateFingerprintByFile(string filePath, int startTimeSeconds, int audioLenSeconds, bool isDB)
+  public byte[] CreateFingerprintByFile(string filePath, int startTimeSeconds, int audioLenSeconds, bool isDB);
    /**
     *
     *  create "ACRCloud Fingerprint" by file path of (Audio/Video file)
@@ -101,7 +101,7 @@ class ACRCloudExtrTool
     *
     **/
     
-  public byte[] DecodeAudioByFile(string filePath, int startTimeSeconds, int audioLenSeconds)
+  public byte[] DecodeAudioByFile(string filePath, int startTimeSeconds, int audioLenSeconds);
     /**
       *
       *  decode audio from file path of (Audio/Video file)
