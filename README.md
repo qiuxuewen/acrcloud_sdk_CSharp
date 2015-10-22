@@ -3,7 +3,7 @@ Create "ACRCloud Fingerprint" by Audio/Video file, and use "ACRCloud Fingerprint
 
 # ACRCloud
 Docs: [https://docs.acrcloud.com/](https://docs.acrcloud.com/)<br>
-Console: ［https://console.acrcloud.com/](http://console.acrcloud.com/)
+Console: [https://console.acrcloud.com/](https://console.acrcloud.com/)
 
 # Overview
 This module can recognize ACRCloud by most of audio/video file.<br>
