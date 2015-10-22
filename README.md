@@ -133,3 +133,41 @@ class ACRCloudExtrTool
       **/
   
 ```
+
+# Example
+ACRCloudRecognitionTest is a VS2010 Project.<br>
+You can replace "XXXXXXXX" below with your project's access_key and access_secret, and run it.
+```c
+static void Main(string[] args)
+        {
+            var config = new Dictionary<string, object>();
+            config.Add("host", "ap-southeast-1.api.acrcloud.com");
+            config.Add("access_key", "XXXXXXXX");
+            config.Add("access_secret", "XXXXXXXX");
+            config.Add("timeout", 10); // seconds
+
+            /**
+              *   
+              *  recognize by file path of (Formatter: Audio/Video)
+              *     Audio: mp3, wav, m4a, flac, aac, amr, ape, ogg ...
+              *     Video: mp4, mkv, wmv, flv, ts, avi ...
+              *     
+              * 
+             **/
+            ACRCloudRecognizer re = new ACRCloudRecognizer(config);
+
+            // It will skip 80 seconds from the beginning of test.mp3.
+            string result = re.RecognizeByFile("test.mp3", 80);
+            Console.WriteLine(result);
+
+            using (FileStream fs = new FileStream(@"test.mp3", FileMode.Open))
+            {
+                using (BinaryReader reader = new BinaryReader(fs))
+                {
+                    byte[] datas = reader.ReadBytes((int)fs.Length);
+                    // It will skip 80 seconds from the beginning of datas.
+                    result = re.RecognizeByFileBuffer(datas, datas.Length, 80);               
+                    Console.WriteLine(result);
+                }
+            }
+```
