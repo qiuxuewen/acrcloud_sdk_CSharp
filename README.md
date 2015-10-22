@@ -1,5 +1,6 @@
 # acrcloud_sdk_CSharp
-Create "ACRCloud Fingerprint" by Audio/Video file, and use "ACRCloud Fingerprint" to recognize metainfos by "ACRCloud webapi".
+Create "ACRCloud Fingerprint" by Audio/Video file, and use "ACRCloud Fingerprint" to recognize metainfos by "ACRCloud webapi".<bt>
+[https://docs.acrcloud.com/](https://docs.acrcloud.com/)
 
 # Overview
 This module can recognize ACRCloud by most of audio/video file.<br>
@@ -11,6 +12,7 @@ Introduction all API.
 ## recognizer.cs
 ```c
 class ACRCloudRecognizer
+{
   public String RecognizeByFile(String filePath, int startSeconds);
     /**
       *
@@ -51,10 +53,10 @@ class ACRCloudRecognizer
       *  @return result metainfos https://docs.acrcloud.com/metadata
       *
       **/
+}
 
 
-
-class ACRCloudExtrTool
+class ACRCloudExtrTool {
   public byte[] CreateFingerprint(byte[] pcmBuffer, int pcmBufferLen, bool isDB);
    /**
     *
@@ -131,6 +133,7 @@ class ACRCloudExtrTool
       *  @return result audio data(formatter:RIFF (little-endian) data, WAVE audio, Microsoft PCM, 16 bit, mono 8000 Hz)
       *
       **/
+  }
   
 ```
 
@@ -138,36 +141,36 @@ class ACRCloudExtrTool
 ACRCloudRecognitionTest is a VS2010 Project.<br>
 You can replace "XXXXXXXX" below with your project's access_key and access_secret, and run it.
 ```c
-static void Main(string[] args)
+void Main(string[] args)
+    {
+        var config = new Dictionary<string, object>();
+        config.Add("host", "ap-southeast-1.api.acrcloud.com");
+        config.Add("access_key", "XXXXXXXX");
+        config.Add("access_secret", "XXXXXXXX");
+        config.Add("timeout", 10); // seconds
+
+        /**
+          *   
+          *  recognize by file path of (Formatter: Audio/Video)
+          *     Audio: mp3, wav, m4a, flac, aac, amr, ape, ogg ...
+          *     Video: mp4, mkv, wmv, flv, ts, avi ...
+          *     
+          * 
+         **/
+        ACRCloudRecognizer re = new ACRCloudRecognizer(config);
+
+        // It will skip 80 seconds from the beginning of test.mp3.
+        string result = re.RecognizeByFile("test.mp3", 80);
+        Console.WriteLine(result);
+
+        using (FileStream fs = new FileStream(@"test.mp3", FileMode.Open))
         {
-            var config = new Dictionary<string, object>();
-            config.Add("host", "ap-southeast-1.api.acrcloud.com");
-            config.Add("access_key", "XXXXXXXX");
-            config.Add("access_secret", "XXXXXXXX");
-            config.Add("timeout", 10); // seconds
-
-            /**
-              *   
-              *  recognize by file path of (Formatter: Audio/Video)
-              *     Audio: mp3, wav, m4a, flac, aac, amr, ape, ogg ...
-              *     Video: mp4, mkv, wmv, flv, ts, avi ...
-              *     
-              * 
-             **/
-            ACRCloudRecognizer re = new ACRCloudRecognizer(config);
-
-            // It will skip 80 seconds from the beginning of test.mp3.
-            string result = re.RecognizeByFile("test.mp3", 80);
-            Console.WriteLine(result);
-
-            using (FileStream fs = new FileStream(@"test.mp3", FileMode.Open))
+            using (BinaryReader reader = new BinaryReader(fs))
             {
-                using (BinaryReader reader = new BinaryReader(fs))
-                {
-                    byte[] datas = reader.ReadBytes((int)fs.Length);
-                    // It will skip 80 seconds from the beginning of datas.
-                    result = re.RecognizeByFileBuffer(datas, datas.Length, 80);               
-                    Console.WriteLine(result);
-                }
+                byte[] datas = reader.ReadBytes((int)fs.Length);
+                // It will skip 80 seconds from the beginning of datas.
+                result = re.RecognizeByFileBuffer(datas, datas.Length, 80);               
+                Console.WriteLine(result);
             }
+        }
 ```
